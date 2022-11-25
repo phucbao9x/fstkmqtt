@@ -1,0 +1,5 @@
+setup.py
+*-*.egg
+build
+dist
+__pycache__
