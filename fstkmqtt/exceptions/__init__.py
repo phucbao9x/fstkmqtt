@@ -6,3 +6,5 @@ class ConnectException:
 class NotEnoughPrivilege(Exception): pass
 
 class NullConnectionError(Exception): pass
+
+class DangerousRequestException(Exception) : pass
