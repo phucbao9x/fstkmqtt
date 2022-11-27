@@ -410,7 +410,7 @@ where = ''
     
     def poolSelect(self, tablename: str, condition: str,*columns):
         fmt = 'SELECT %s FROM %s%s;'
-        if condition: condition = f' WHERE {condition}'
+        if condition: condition = ' WHERE %s'%condition
         cols = ",".join([i().__name__ if type(i) is type else str(i) for i in columns]) if len(columns) else "*"
         if self.__index__ >= self.__pool_size__: self.__index__ = 0
         self.__poolList__[self.__index__].cursor().execute(fmt%(tablename, cols, condition))

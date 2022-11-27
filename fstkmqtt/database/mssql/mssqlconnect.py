@@ -128,7 +128,7 @@ class SQLServer:
     
     def select(self, formatstrtabletoend: str, data: t.Optional[tuple] = None, *columns):
         if not self.__is_connected__: raise NullConnectionError
-        if not data: raise MissingDataError
+        if not data: raise MissingDataException
         fmt_query = 'SELECT %s ' + formatstrtabletoend%data
         cols = '*' if not columns else ', '.join([column().__name__ if istype(column, type) else column for column in columns])
         self.__cursor__.execute(fmt_query%(cols))
@@ -136,7 +136,7 @@ class SQLServer:
     
     def selectmany(self, formatstrtabletoend: str, datastore: t.Optional[list[tuple]] = None, *columns):
         if not self.__is_connected__: raise NullConnectionError
-        if not datastore: raise MissingDataError
+        if not datastore: raise MissingDataException
         res = []
         for data in datastore:
             res.append(self.select(formatstrtabletoend, data, *columns))
@@ -144,7 +144,7 @@ class SQLServer:
 
     def insert(self, tablename: str, **col_data_pair):
         if not self.__is_connected__: raise NullConnectionError
-        if not tablename or not col_data_pair: raise MissingDataError
+        if not tablename or not col_data_pair: raise MissingDataException
         fmt_query = 'INSERT INTO %s (%s) VALUES %s'
         cols = ', '.join(list(col_data_pair))
         datas = ', '.join([f'\'{data}\'' if istype(data, str) else str(data) for data in list(col_data_pair.values())])

@@ -76,9 +76,8 @@ def _default_handling(sock, address, *args, **kargs):
     k = request(sock, 1024)
     response(sock, b"""HTTP/1.1 200 OK
 Date: Mon, 27 Jul 2009 12:28:53 GMT
-Server: Apache/2.2.14 (Win32)
+Server: FullstackMQTT/0.0.1a (Win32)
 Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT
-Content-Length: 88
 Content-Type: text/html
 
 <html>
@@ -94,8 +93,8 @@ def _default_end_handling(sock, address, *args, **kargs):
 def loop_forever_http_server(
         host: str,
         port : int,
-        *args,
         listen: int = 20,
+        *args,
         **kwargs
     ) -> None:
     tmp = httpserver(host, port, listen)
@@ -106,5 +105,5 @@ def loop_forever_http_server(
     tmp.config(ca_file, key_file)
     tmp.connect()
     while True: 
-        try: ThreadHandling(None, func_handling, end_handling, *(tmp.accept())).start()
+        try: ThreadHandling(None, func_handling, end_handling, *(*tmp.accept(), *args)).start()
         except: break

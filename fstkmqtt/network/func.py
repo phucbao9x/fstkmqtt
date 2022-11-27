@@ -1,4 +1,4 @@
-def request(sock, buffer) -> bytes:
+def request(sock, buffer = 1024) -> bytes:
     data = b''
     while True:
         tmp = sock.recv(buffer)
