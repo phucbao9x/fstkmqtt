@@ -4,6 +4,13 @@ Nền tảng Fullstack MQTT cung cấp cho kỹ sư, sinh viên một loạt th�
 
 ---
 
+## __Cài đặt__
+~~~terminal
+>> pip install fstkmqtt
+~~~
+
+---
+
 ## __Phiên bản__
 Phiên bản mới nhất hiện nay là phiên bản thử nghiệm Beta __0.0.1a0__
 
