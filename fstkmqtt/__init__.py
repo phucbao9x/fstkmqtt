@@ -38,13 +38,15 @@ from .database.mysql.mysqlconnect import (
     createFailoverserver
 )
 from .database.mysql.mysqlquery import query as mysqlquery
+from .database.mssql.mssqlconnect import SQLServer
 
-from .database.sqlite.sqliteconnect import sqliteconnect as SQLite
+from .database.sqlite.sqliteconnect import sqliteconnect as _SQLite
 from .database.sqlite.sqlitequery import query as SQLiteQuery
 
 from .database.warehouse.warehouseconnect import warehouseconnect as Warehouse
 
-class SQLServer:
+class MSSQL:
+    SQLServer = SQLServer
     SQLServerConnection = MSSQLConnection
     SQLServerQuery = mssqlQuery
 
@@ -56,7 +58,7 @@ class MySQL:
     CreateFailoverServer = createFailoverserver
 
 class SQLite:
-    Connection = SQLite
+    SQLite = _SQLite
     Query = SQLiteQuery
 
 Warehouse = Warehouse
@@ -83,6 +85,5 @@ httpserver = httpserver
 request = request
 response = response
 
-from .render import GetRender
-GetRender =GetRender
-
+from .render import GetRender as _Getrender
+GetRender =_Getrender

@@ -31,13 +31,17 @@ class TrafficApp_Abstract:
         raise NotImplementedError
 
     def config(self, **options):
-        self._host = options.pop('host', self._host)
-        self._port = options.pop('port', self._port)
+        tmp_host = options.pop('host', self._host)
+        self._host = tmp_host if tmp_host else self._host
+        tmp_port = options.pop('port', self._port)
+        self._port = tmp_port if tmp_port else self._port
 
         self._prikey = options.pop('key_file', None)
         self._pubkey = options.pop('ca_file', None)
 
         self._typeprotocol = options.pop('protocol', 'HTTP')
+
+        self._tcpfuncProcess = options.pop('TCPProcess', lambda x: x)
 
     def _handling_http_request(sock, address, *args, **kargs):
         print(f'[+] Connect from {address[0]}:{address[1]}')
@@ -46,7 +50,7 @@ class TrafficApp_Abstract:
         key = first_request['method'] + ";" + first_request['baseurl']
         if first_request['method'] != 'GET': payload = _this._stdin.read()
         else: payload = None
-        response(sock, _this._dfunc[key](first_request, payload))
+        response(sock, _this._dfunc[key](first_request, payload=payload))
 
     def _run_with_http(self, listen = 20):
         if self._pubkey and self._prikey:

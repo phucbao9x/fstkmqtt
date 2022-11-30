@@ -84,20 +84,20 @@ class GetRender:
         for file_css in listfilecss:
             try:
                 with open(os.path.join(basetocss, file_css), 'rb') as f: datacss += "\n%s"%f.read().decode()
-            except FileNotFoundError: print ("Not found file: '%s' with abspath is '%s'"%(file_css, os.path.join(basetocss, file_css)))
+            except: pass
         datacss =datacss.strip()
 
         datajs = ''
         for file_js in listfilejs:
             try:
                 with open(os.path.join(basetojs, file_js), 'rb') as f: datajs += "\n%s"%f.read().decode()
-            except FileNotFoundError: print ("Not found file: '%s' with abspath is '%s'"%(file_js, os.path.join(basetojs, file_js)))
+            except: pass
         datajs =datajs.strip()
 
         if basehtml:
             try: 
                 with open(os.path.join(basetohtml, basehtml), 'rb') as f: basehtml = f.read().decode()
-            except FileNotFoundError: print ("Not found file: '%s' with abspath is '%s'"%(basehtml, os.path.join(basetohtml, basehtml)))
+            except: pass
 
         if basehtml:
             return GetRender._render_with_base_html(basehtml, datahtml, datajs, datacss) 
