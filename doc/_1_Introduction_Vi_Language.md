@@ -12,11 +12,11 @@ Nền tảng Fullstack MQTT cung cấp cho kỹ sư, sinh viên một loạt th�
 ---
 
 ## __Phiên bản__
-Phiên bản mới nhất hiện nay là phiên bản thử nghiệm Beta __0.0.1a0__
+Phiên bản mới nhất hiện nay là phiên bản thử nghiệm Beta __0.0.1a1__
 
 ---
 ## __Môi trường làm việc__
-Chúng tôi thật tiếc với nguồn lực hiện tại chúng tôi chỉ có thể phát triển nền tảng chạy trên hệ điều hành Window và Window Server (Đối với bản Beta __0.0.1a0__) Trong tương lai chúng tôi sẽ chuyển mình sao cho phù hợp với tất cả hệ điều hành.
+Chúng tôi thật tiếc với nguồn lực hiện tại chúng tôi chỉ có thể phát triển nền tảng chạy trên hệ điều hành Window và Window Server (Đối với bản Beta __0.0.1a1__) Trong tương lai chúng tôi sẽ chuyển mình sao cho phù hợp với tất cả hệ điều hành.
 
 ---
 ## __Ngôn ngữ lập trình__

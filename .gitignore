@@ -4,3 +4,4 @@ build
 dist
 __pycache__
 setup.py 
+*.egg-info
