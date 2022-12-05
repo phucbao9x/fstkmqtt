@@ -43,6 +43,8 @@ class TrafficApp_Abstract:
 
         self._tcpfuncProcess = options.pop('TCPProcess', lambda x: x)
 
+        self._is_do_handshake = options.pop('is_do_handshake', True)
+
     def _handling_http_request(sock, address, *args, **kargs):
         print(f'[+] Connect from {address[0]}:{address[1]}')
         _this = args[0]
@@ -52,7 +54,7 @@ class TrafficApp_Abstract:
         else: payload = None
         response(sock, _this._dfunc[key](first_request, payload=payload))
 
-    def _run_with_http(self, listen = 20):
+    def _run_with_http(self, listen = 20, is_dohandshake = True):
         if self._pubkey and self._prikey:
             print(f'Run at: https://{skt.gethostbyname(self._host)}:{self._port}')
         else:
@@ -64,7 +66,8 @@ class TrafficApp_Abstract:
             self,
             ca_file = self._pubkey,
             key_file = self._prikey,
-            handling_func = TrafficApp_Abstract._handling_http_request)
+            handling_func = TrafficApp_Abstract._handling_http_request,
+            is_dohandshake = is_dohandshake)
 
     def _handling_tcp_request(sock, address, *self, **kargs):
         self = self[0]
@@ -83,7 +86,7 @@ class TrafficApp_Abstract:
 
     def run(self, listen = 20):
         if self._typeprotocol == 'HTTP':
-            self._run_with_http(listen)
+            self._run_with_http(listen, self._is_do_handshake)
         else:
             self._run_with_tcp(listen)
 

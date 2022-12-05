@@ -1,7 +1,7 @@
 # **Hướng dẫn cơ bản**
 ## **Tạo một dự án**
 ~~~terminal
->> python -m fstkmqtt <name project>
+>> python -m fullstackmqtt <name project>
 ~~~
 
 ## **Tạo một ứng dụng**

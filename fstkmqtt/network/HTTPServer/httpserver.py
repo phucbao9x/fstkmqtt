@@ -36,15 +36,20 @@ class httpserver(_sock_object):
         self.__context__ = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
         self.__ssl_sock__ = None
         self.__is_https__ = False
+        self.__is_do_handshake = True
     
     def config(
             self, 
             ca_file: strOrBytesPath = None, 
-            key_file: strOrBytesPath = None):
+            key_file: strOrBytesPath = None,
+            **kwargs):
         self.__ca_file__ = ca_file
         self.__key_file__ = key_file
+        
+        self.__is_do_handshake = kwargs.pop('is_do_hand_shake', self.__is_do_handshake)
         if ca_file and key_file:
             try: 
+
                 self.__context__.load_cert_chain(ca_file, key_file)
                 self.__is_https__ = True
             except: raise FileNotFoundError
@@ -53,7 +58,7 @@ class httpserver(_sock_object):
 
     def connect(self):
         self.__tcp_server__.connect()
-        if self.__is_https__: self.__ssl_sock__ = self.__context__.wrap_socket(self.__tcp_server__.connection, server_side=True)
+        if self.__is_https__: self.__ssl_sock__ = self.__context__.wrap_socket(self.__tcp_server__.connection, server_side=True, do_handshake_on_connect=self.__is_do_handshake)
         else: self.__ssl_sock__ = self.__tcp_server__.connection
 
     def disconnect(self):
@@ -102,7 +107,8 @@ def loop_forever_http_server(
     end_handling = kwargs.pop('end_handling', _default_end_handling)
     ca_file = kwargs.pop('ca_file', None)
     key_file = kwargs.pop('key_file', None)
-    tmp.config(ca_file, key_file)
+    do_handshake = kwargs.pop('is_dohandshake', True)
+    tmp.config(ca_file, key_file, is_do_hand_shake = do_handshake)
     tmp.connect()
     while True: 
         try: ThreadHandling(None, func_handling, end_handling, *(*tmp.accept(), *args)).start()

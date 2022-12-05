@@ -114,12 +114,12 @@ VALUEAUTO = 1
 import getpass
 if user and not password: password = getpass.getpass('$password>>')
 import os
-view = b'{\\r\\n"view": {\\r\\n"__type__" : "dir",\\r\\n"%s" : {\\r\\n"__type__" : "dir",\\r\\n"__init__.py": {\\r\\n"__type__" : "__file__",\\r\\n"__content__" : "import os;tmp = os.listdir();joinpath = lambda *x: os.path.join(*x)\\\\ndef _allfiles(dir):\\\\n\\\\tres = {}\\\\n\\\\tld = os.listdir(dir)\\\\n\\\\tfor i in ld:\\\\n\\\\t\\\\tif i == \\\\"__init__.py\\\\": continue\\\\n\\\\t\\\\ttmp = joinpath(dir, i)\\\\n\\\\t\\\\tif os.path.isfile(tmp): res[\\\\"/\\\\".join(tmp.split(\\\\"\\\\\\\\\\\\\\\\\\\\")[-2:]).split(\\\\".\\\\")[0]]=tmp\\\\n\\\\t\\\\telse: res.update(_allfiles(tmp))\\\\n\\\\treturn res\\\\nallfile = _allfiles(os.path.abspath(os.curdir))\\\\ndel tmp, joinpath"\\r\\n},\\r\\n"theme" : {\\r\\n"__type__" : "dir",\\r\\n"index.html": {\\r\\n"__type__" : "__file__",\\r\\n"__content__" : "<!DOCTYPE html>\\\\n<html lang=\\\\"en\\\\">\\\\n<head>\\\\n\\\\t<meta charset=\\\\"UTF-8\\\\">\\\\n\\\\t<meta http-equiv=\\\\"X-UA-Compatible\\\\" content=\\\\"IE=edge\\\\">\\\\n\\\\t<meta name=\\\\"viewport\\\\" content=\\\\"width=device-width, initial-scale=1.0\\\\">\\\\n\\\\t<title>Document</title>\\\\n</head>\\\\n<body>\\\\n\\\\t\\\\n</body>\\\\n</html>"\\r\\n}\\r\\n},\\r\\n"style" : {\\r\\n"__type__" : "dir",\\r\\n"style.css": {\\r\\n"__type__" : "__file__",\\r\\n"__content__" : ""\\r\\n}\\r\\n},\\r\\n"code" : {\\r\\n"__type__" : "dir",\\r\\n"code.js": {\\r\\n"__type__" : "__file__",\\r\\n"__content__" : ""\\r\\n}\\r\\n}\\r\\n}\\r\\n}\\r\\n}\\r\\n\\r\\n\\r\\n'
-viewmodel=b'{\\r\\n"viewmodel": {\\r\\n"__type__" : "dir",\\r\\n"%s" : {\\r\\n"__type__" : "dir",\\r\\n"__init__.py": {\\r\\n"__type__" : "__file__",\\r\\n"__content__" : ""\\r\\n},\\r\\n"page.py": {\\r\\n"__type__" : "__file__",\\r\\n"__content__" : "import sys\\\\nsys.path.append(\\\\"../../\\\\")\\\\nfrom view.hello import allfile\\\\nfrom fstkmqtt import GetRender\\\\ndef page_%s_process(request, *args, **kwargs):\\\\n\\\\t# Your code:\\\\n\\\\tpass"\\r\\n}\\r\\n}\\r\\n}\\r\\n}\\r\\n\\r\\n\\r\\n'
+view = b'{\\r\\n"view": {\\r\\n"__type__" : "dir",\\r\\n"{0}" : {\\r\\n"__type__" : "dir",\\r\\n"__init__.py": {\\r\\n"__type__" : "__file__",\\r\\n"__content__" : "import os;tmp = os.listdir();joinpath = lambda *x: os.path.join(*x)\\\\ndef _allfiles(dir):\\\\n\\\\tres = dict()\\\\n\\\\tld = os.listdir(dir)\\\\n\\\\tfor i in ld:\\\\n\\\\t\\\\tif i == \\\\"__init__.py\\\\": continue\\\\n\\\\t\\\\ttmp = joinpath(dir, i)\\\\n\\\\t\\\\tif os.path.isfile(tmp): res[\\\\"/\\\\".join(tmp.split(\\\\"\\\\\\\\\\\\\\\\\\\\")[-2:]).split(\\\\".\\\\")[0]]=tmp\\\\n\\\\t\\\\telse: res.update(_allfiles(tmp))\\\\n\\\\treturn res\\\\nallfile = _allfiles(os.path.abspath(os.curdir))\\\\ndel tmp, joinpath"\\r\\n},\\r\\n"theme" : {\\r\\n"__type__" : "dir",\\r\\n"index.html": {\\r\\n"__type__" : "__file__",\\r\\n"__content__" : "<!DOCTYPE html>\\\\n<html lang=\\\\"en\\\\">\\\\n<head>\\\\n\\\\t<meta charset=\\\\"UTF-8\\\\">\\\\n\\\\t<meta http-equiv=\\\\"X-UA-Compatible\\\\" content=\\\\"IE=edge\\\\">\\\\n\\\\t<meta name=\\\\"viewport\\\\" content=\\\\"width=device-width, initial-scale=1.0\\\\">\\\\n\\\\t<title>{0}</title>\\\\n</head>\\\\n<body>\\\\n\\\\t\\\\n</body>\\\\n</html>"\\r\\n}\\r\\n},\\r\\n"style" : {\\r\\n"__type__" : "dir",\\r\\n"style.css": {\\r\\n"__type__" : "__file__",\\r\\n"__content__" : ""\\r\\n}\\r\\n},\\r\\n"code" : {\\r\\n"__type__" : "dir",\\r\\n"code.js": {\\r\\n"__type__" : "__file__",\\r\\n"__content__" : ""\\r\\n}\\r\\n}\\r\\n}\\r\\n}\\r\\n}\\r\\n\\r\\n\\r\\n'
+viewmodel=b'{\\r\\n"viewmodel": {\\r\\n"__type__" : "dir",\\r\\n"{0}.py" : {\\r\\n"__type__" : "__file__",\\r\\n"__content__" : "import sys\\\\nsys.path.append(\\\\"../\\\\")\\\\nfrom view.{0} import allfile\\\\nfrom fstkmqtt import GetRender\\\\ndef page_{0}_process(request, *args, **kwargs):\\\\n\\\\t# Your code:\\\\n\\\\tpass"\\r\\n}\\r\\n}\\r\\n}\\r\\n\\r\\n\\r\\n'
 modulepyfile = {
     "mysql": "from fstkmqtt import MySQL\\r\\nmysql{id} = MySQL.MySQL()\\nmysql{id}.config(\\n\\thost = {host},\\n\\tuser = {user},\\n\\tpassword= \\"{password}\\",\\n\\tdatabase = {dbname}\\n)",
     'mssql': "from fstkmqtt import MSSQL\\r\\nmssql{id} = MSSQL.SQLServer()\\ns.config(\\n\\tuser={user},\\n\\tpassword=\\"{password}\\",\\n\\tdatabased={dbname},\\n\\thost = {host},\\n\\tport = {port}\\n)",
-    "sqlite": "from fstkmqtt import SQLite\\n\\nsqlite{id} = SQLite.SQLite()\\na.config(\\n\\tdatabase='{dbpath}'\\n)",
+    "sqlite": "from fstkmqtt import SQLite\\n\\nsqlite{id} = SQLite.SQLite()\\nsqlite{id}.config(\\n\\tdatabase='{dbpath}'\\n)",
     'warehouse' : '''from fstkmqtt import Warehouse
 warehouse{id} = Warehouse()
 from datetime import datetime
@@ -138,7 +138,7 @@ def directoryget(data, *replace, parent = []):
     currentpath = os.path.abspath(os.curdir)
     _type_ = data['__type__']
     __path__ = joinpath(currentpath, *parent)
-    try: __path__ = __path__%replace
+    try: __path__ = __path__.format(*replace)
     except: pass
     tmp = parent.copy()
     if _type_ == "dir":
@@ -156,7 +156,7 @@ def directoryget(data, *replace, parent = []):
             rawdata = data['__content__']
             try: rawdata = data['__content__'].decode()
             except: rawdata = data['__content__']
-            try: rawdata = rawdata%replace
+            try: rawdata = rawdata.format(*replace)
             except: pass
             with open(__path__, 'x') as f:
                 f.write(rawdata)
@@ -164,7 +164,7 @@ def directoryget(data, *replace, parent = []):
 if createapp:
     directoryget(VIEW['view'], createapp, parent=['view'])
     directoryget(VIEWMODEL['viewmodel'], createapp, parent=['viewmodel'])    
-    data = 'from viewmodel.{nameapp}.page import allfile as allfileHello, page_{nameapp}_process\\r'
+    data = 'from viewmodel.{nameapp} import allfile as allfileHello, page_{nameapp}_process\\r'
     with open('app.py', 'r') as f:
         nowdata = f.read()
     location = nowdata.find('#AUTO_ADD_LIB%')
@@ -239,7 +239,7 @@ def directoryget(data, *replace, parent = []):
     currentpath = os.path.abspath(os.curdir)
     _type_ = data['__type__']
     __path__ = joinpath(currentpath, *parent)
-    try: __path__ = __path__%replace
+    try: __path__ = __path__.format(*replace)
     except: pass
     tmp = parent.copy()
     if _type_ == "dir":
@@ -257,7 +257,7 @@ def directoryget(data, *replace, parent = []):
             rawdata = data['__content__']
             try: rawdata = data['__content__'].decode()
             except: rawdata = data['__content__']
-            try: rawdata = rawdata%replace
+            try: rawdata = rawdata.format(*replace)
             except: pass
             with open(__path__, 'x') as f:
                 f.write(rawdata)
@@ -305,6 +305,13 @@ app.config(
 #             \\r<h1>Hello, World!</h1>
 #             \\r</body>
 #             \\r</html>"""
+
+@app.route('/favicon.ico', method="GET")
+def fslashfaviconDotIco(request, *args, **kwargs):
+    return b"""HTTP/1.1 200 OK
+            \rServer: FullstackMQTT/0.0.1a1 (Win32)
+            \rLast-Modified: Wed, 22 Jul 2009 19:15:56 GMT
+            \rContent-Type: No-Content"""
 
 #AUTO_ADD%\n
 app.run()

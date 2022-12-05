@@ -6,7 +6,7 @@ _Hãy nhớ cài package trước nhé. Nếu bạn chưa cài hãy_ <a href="_1
 __Bước 1: Mình di chuyển đến desktop__<br>
 Mình thực hiện dòng lệnh sau:
 ~~~
->> python -m pyFMQTT --name firstproject
+>> python -m fullstackmqtt --name firstproject
 ~~~
 Sau đó:
 ~~~
