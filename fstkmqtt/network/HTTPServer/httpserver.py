@@ -48,8 +48,7 @@ class httpserver(_sock_object):
         
         self.__is_do_handshake = kwargs.pop('is_do_hand_shake', self.__is_do_handshake)
         if ca_file and key_file:
-            try: 
-
+            try:
                 self.__context__.load_cert_chain(ca_file, key_file)
                 self.__is_https__ = True
             except: raise FileNotFoundError
